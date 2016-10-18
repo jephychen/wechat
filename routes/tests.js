@@ -77,4 +77,33 @@ router.get('/getmenu', function (req, res, next){
   });
 });
 
+router.get('/callwx', function (req, res, next){
+  var data =
+      '<xml>' +
+      '<ToUserName><![CDATA[gh_2582e34371fb]]></ToUserName> ' +
+      '<FromUserName><![CDATA[ojEePwJgU_RMkjQdSfqGMXY2Ujvw]]></FromUserName> ' +
+      '<CreateTime>1476760586</CreateTime> ' +
+      '<MsgType><![CDATA[event]]></MsgType> ' +
+      '<Event><![CDATA[subscribe]]></Event> ' +
+      '<EventKey><![CDATA[]]></EventKey> ' +
+      '</xml>';
+  var opts = {
+    url: "http://127.0.0.1:3000/wx",
+    form: data,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length':data.length
+    }
+  };
+  request.post(opts, function (err, response, body){
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }else {
+      console.log(body);
+      res.send(body);
+    }
+  });
+});
+
 module.exports = router;
