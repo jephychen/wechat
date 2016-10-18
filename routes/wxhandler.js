@@ -5,7 +5,6 @@ var express = require('express');
 var router = express.Router();
 
 router.post('/', function (req, res, next){
-    console.log("request body:" + req.body.toString());
     var receiveData = '';
     req.on('data', function (chunk){
         receiveData += chunk;
